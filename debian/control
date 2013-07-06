@@ -1,0 +1,12 @@
+Source: qslsaver
+Section: x11
+Priority: extra
+Maintainer: Gauvain Pocentek <gauvain@pocentek.net>
+Build-Depends: debhelper (>= 9.0.0), cmake, libxcb-screensaver0-dev, qtbase5-dev
+Standards-Version: 3.9.4
+
+Package: qslsaver
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Qt5 Slideshow Screen Saver
+ Qt5 Slideshow Screen Saver.

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Slideshow Screensaver Preferences
+Comment=Slideshow Screensaver Preferences
+Exec=@CMAKE_INSTALL_PREFIX@/bin/qslsaver-preferences
+Icon=screensaver
+Categories=Settings;
