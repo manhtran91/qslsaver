@@ -35,8 +35,6 @@ Worker::Worker() : QLabel() , m_idx(0)
 
     setMouseTracking(true);
 
-    buildFilesList();
-
     connect(e, SIGNAL(eventHappened()), this, SLOT(stop()));
     connect(&m_timer, SIGNAL(timeout()), this, SLOT(showNext()));
 }
@@ -56,6 +54,13 @@ void Worker::buildFilesList()
 
 void Worker::start()
 {
+    buildFilesList();
+    if (m_files.isEmpty())
+    {
+        emit(stopped());
+        return;
+    }
+
     showFullScreen();
     showNext();
     grabMouse();
