@@ -41,6 +41,10 @@ void Watcher::onTimeout()
     free (info);
 
     QSettings settings("qslsaver", "qslsaver");
+    bool enabled = settings.value("enabled", 1).toBool();
+    if (!enabled)
+        return;
+
     int time = settings.value("timeout", 10).toInt() * 60000;
 
     if (idle <= time)

@@ -30,6 +30,10 @@ Options::Options() : QDialog()
     ui.timeoutSpin->setValue(settings.value("timeout", 10).toInt());
     ui.delaySpin->setValue(settings.value("delay", 10).toInt());
 
+    bool state = settings.value("enabled", 1).toBool();
+    ui.enableChk->setChecked(state);
+    ui.frame->setEnabled(state);
+
     QString defaultPath = QDir::homePath();
     defaultPath = QString("%1/Pictures").arg(defaultPath);
     QString path(settings.value("directory", defaultPath).toString());
@@ -55,4 +59,11 @@ void Options::on_delaySpin_valueChanged(int value)
 {
     QSettings settings("qslsaver", "qslsaver");
     settings.setValue("delay", value);
+}
+
+void Options::on_enableChk_stateChanged(int state)
+{
+    QSettings settings("qslsaver", "qslsaver");
+    settings.setValue("enabled", (bool)state);
+    ui.frame->setEnabled(state);
 }

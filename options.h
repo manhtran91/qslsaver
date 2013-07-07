@@ -34,6 +34,7 @@ private slots:
     void on_timeoutSpin_valueChanged(int value);
     void on_directoryBtn_clicked();
     void on_delaySpin_valueChanged(int value);
+    void on_enableChk_stateChanged(int state);
 };
 
 #endif
