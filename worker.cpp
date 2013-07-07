@@ -18,7 +18,7 @@
 #include <QDir>
 #include <QSettings>
 #include <QApplication>
-#include <QScreen>
+#include <QDesktopWidget>
 
 #include "eventfilter.h"
 #include "worker.h"
@@ -89,9 +89,10 @@ bool Worker::setImage(QString &path)
     if (source.isNull())
         return false;
 
-    QSize size = QApplication::primaryScreen()->availableSize();
-    int lw = size.width();
-    int lh = size.height();
+    QDesktopWidget *desktop = QApplication::desktop();
+    QRect geo = desktop->screenGeometry(desktop->primaryScreen());
+    int lw = geo.width();
+    int lh = geo.height();
     float iw = source.width();
     float ih = source.height();
 
