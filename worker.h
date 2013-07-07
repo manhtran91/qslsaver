@@ -40,6 +40,7 @@ private:
     int m_idx;
 
     void buildFilesList();
+    bool setImage(QString &path);
 
 private slots:
     void showNext();

@@ -17,6 +17,8 @@
 
 #include <QDir>
 #include <QSettings>
+#include <QApplication>
+#include <QScreen>
 
 #include "eventfilter.h"
 #include "worker.h"
@@ -25,9 +27,11 @@ Worker::Worker() : QLabel() , m_idx(0)
 {
     EventFilter *e = new EventFilter;
     installEventFilter(e);
+    setAutoFillBackground(true);
     setBackgroundRole(QPalette::Base);
     setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-    setScaledContents(true);
+    setStyleSheet("QLabel { background-color: black; }");
+    setAlignment(Qt::AlignCenter);
 
     setMouseTracking(true);
 
@@ -75,10 +79,31 @@ void Worker::showNext()
         m_idx = 0;
 
     QString path = m_files.at(m_idx).absoluteFilePath();
-    QImage image(path);
-    if (image.isNull())
+    if (!setImage(path))
         showNext();
-
-    setPixmap(QPixmap::fromImage(image));
 }
 
+bool Worker::setImage(QString &path)
+{
+    QImage source(path), dest;
+    if (source.isNull())
+        return false;
+
+    QSize size = QApplication::primaryScreen()->availableSize();
+    int lw = size.width();
+    int lh = size.height();
+    float iw = source.width();
+    float ih = source.height();
+
+    if ((iw <= lw) && (ih <= lh))
+        dest = source;
+    else
+        if ((iw / lw) > (ih / lh))
+            dest = source.scaledToWidth(lw, Qt::SmoothTransformation);
+        else
+            dest = source.scaledToHeight(lh, Qt::SmoothTransformation);
+
+    setPixmap(QPixmap::fromImage(dest));
+
+    return true;
+}
