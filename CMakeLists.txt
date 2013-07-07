@@ -11,9 +11,13 @@ find_package(PkgConfig)
 
 set(VERSION 0.1)
 
-pkg_check_modules(XCB xcb-screensaver)
-link_directories(${XCB_LIBRARY_DIRS})
-include_directories(${XCB_INCLUDE_DIRS})
+pkg_check_modules(XCBSS xcb-screensaver)
+link_directories(${XCBSS_LIBRARY_DIRS})
+include_directories(${XCBSS_INCLUDE_DIRS})
+
+pkg_check_modules(XCBDPMS xcb-dpms)
+link_directories(${XCBDPMS_LIBRARY_DIRS})
+include_directories(${XCBDPMS_INCLUDE_DIRS})
 
 configure_file(data/qslsaver.desktop.in
                data/qslsaver.desktop)
@@ -27,7 +31,7 @@ set(qslsaver_SRCS
     worker.cpp)
 add_executable(qslsaver ${qslsaver_SRCS})
 qt5_use_modules(qslsaver Widgets)
-target_link_libraries(qslsaver ${XCB_LIBRARIES})
+target_link_libraries(qslsaver ${XCBSS_LIBRARIES} ${XCBDPMS_LIBRARIES})
 
 set(pref_SRCS
     prefs.cpp

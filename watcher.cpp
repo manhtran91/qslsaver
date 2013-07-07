@@ -15,6 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <xcb/screensaver.h>
+#include <xcb/dpms.h>
+
 #include <QSettings>
 
 #include "watcher.h"
@@ -23,6 +26,7 @@ Watcher::Watcher() : QTimer()
 {
     connection = xcb_connect (NULL, NULL);
     screen = xcb_setup_roots_iterator (xcb_get_setup (connection)).data;
+    xcb_dpms_disable (connection);
 
     connect(this, SIGNAL(timeout()), this, SLOT(onTimeout()));
     setInterval(1000);

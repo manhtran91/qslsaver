@@ -19,7 +19,6 @@
 #define WATCHER_H
 
 #include <xcb/xcb.h>
-#include <xcb/screensaver.h>
 
 #include <QLabel>
 #include <QImage>
