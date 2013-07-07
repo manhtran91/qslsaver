@@ -4,4 +4,4 @@ Name=Slideshow Screensaver Preferences
 Comment=Slideshow Screensaver Preferences
 Exec=@CMAKE_INSTALL_PREFIX@/bin/qslsaver-preferences
 Icon=screensaver
-Categories=Settings;
+Categories=Settings;X-XFCE-SettingsDialog;X-XFCE-PersonalSettings;
